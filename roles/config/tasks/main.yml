@@ -21,6 +21,6 @@
     dest: "{{ project_path }}/docker-compose.yml"
 
 - name: Levantar contenedores con Podman
-  command: podman-compose -d up
+  command: /usr/local/bin/podman-compose -d up
   args:
     chdir: "{{ project_path }}"
