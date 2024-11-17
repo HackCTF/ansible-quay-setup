@@ -14,11 +14,14 @@
     src: "{{ project_path }}/toolkit-installation/quay/config.yaml"
     dest: "{{ project_path }}/config.yaml"
 
-
-- name: Configurar docker-compose.yml
-  template:
-    src: docker-compose.yml.j2
-    dest: "{{ project_path }}/docker-compose.yml"
+- name: Crear directorios necesarios si no existen
+  file:
+    path: "{{ project_path }}/quay-registry"
+    state: directory
+    owner: "1000"
+    group: "1000"
+    mode: "0755"
+  become: true
 
 - name: Asegurarse de que los permisos de los volúmenes son correctos
   file:
@@ -27,6 +30,11 @@
     group: "1000"
     mode: "0755"
   become: true
+  
+- name: Configurar docker-compose.yml
+  template:
+    src: docker-compose.yml.j2
+    dest: "{{ project_path }}/docker-compose.yml"
 
 - name: Levantar contenedores con Podman
   command: "/usr/local/bin/podman-compose -f {{ project_path }}/docker-compose.yml up -d"
