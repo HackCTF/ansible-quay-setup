@@ -20,6 +20,15 @@
     src: docker-compose.yml.j2
     dest: "{{ project_path }}/docker-compose.yml"
 
+- name: Asegurarse de que los permisos de los volúmenes son correctos
+  file:
+    path: "{{ project_path }}/quay-registry/conf/init/certs_install.sh"
+    owner: "1000"
+    group: "1000"
+    mode: "0755"
+  become: true
+  when: quay_container_status is changed
+
 - name: Levantar contenedores con Podman
   command: "/usr/local/bin/podman-compose -f {{ project_path }}/docker-compose.yml up -d"
   args:
