@@ -1,5 +1,5 @@
-ip_host: "{{ ansible_host }}"
+ip_host: "192.168.1.100"  # Cambia esto por la IP real de tu servidor
+project_path: "/opt/quay"
 quay_user: "neomatrix"
 quay_password: "E0J28S1DFEMUVYG04JWT3WVL8PCMGAWSQPIO7OKZKFY0YUFFDTBW8FVCYOTCOQE6"
 quay_port: "8080"
-project_path: "/opt/quay"

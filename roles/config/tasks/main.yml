@@ -3,10 +3,17 @@
     path: "{{ project_path }}"
     state: directory
 
-- name: Configurar config.yaml
-  template:
-    src: config.yaml.j2
+- name: Clonar repositorio del toolkit
+  git:
+    repo: https://github.com/HackCTF/toolkit-installation.git
+    dest: "{{ project_path }}/toolkit-installation"
+    version: main  # Cambia si el branch es diferente
+
+- name: Copiar config.yaml desde el repositorio
+  copy:
+    src: "{{ project_path }}/toolkit-installation/quay/config.yaml"
     dest: "{{ project_path }}/config.yaml"
+
 
 - name: Configurar docker-compose.yml
   template:

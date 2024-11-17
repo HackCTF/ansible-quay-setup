@@ -1,12 +1,57 @@
-version: '3.3'
+version: '3.8'
+
 services:
-  quay:
-    image: quay.io/projectquay/quay
-    ports:
-      - "{{ quay_port }}:8080"
+  postgres:
+    image: quay.io/fedora/postgresql-16:latest
     environment:
-      - QUAY_HOSTNAME={{ ip_host }}
+      POSTGRESQL_USER: quay
+      POSTGRESQL_PASSWORD: password
+      POSTGRESQL_DATABASE: quay
+    ports:
+      - "5432:5432"
+    networks:
+      - quay-net
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: quay.io/fedora/redis-7:latest
+    ports:
+      - "6379:6379"
+    networks:
+      - quay-net
+
+  quay:
+    image: quay.io/projectquay/quay:latest
+    environment:
+      DATABASE_TYPE: postgres
+      DATABASE_URL: postgres://quay:password@{{ip_host}}:5432/quay
+      LOG_LEVEL: debug
+      HTTP_ADDR: 0.0.0.0:8080
+      SERVER_HOSTNAME: "localhost"
+      BUILDLOGS_REDIS: "redis://{{ip_host}}:6379/0"
+    ports:
+      - "8080:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - quay-net
     volumes:
-      - quay_storage:/datastorage
-volumes:
-  quay_storage:
+      - ./config.yaml:/quay-registry/conf/stack/config.yaml  # Montar el archivo de configuración
+      - ./storage:/datastorage:rw,Z  # Montar el almacenamiento de Quay
+    user: 1000:1000
+    cap_drop:
+      - ALL
+    cap_add:
+      - CHOWN
+      - FOWNER
+    security_opt:
+      - no-new-privileges:true
+
+networks:
+  quay-net:
+    driver: bridge
