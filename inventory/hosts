@@ -1,0 +1,5 @@
+[quay_servers]
+#192.168.1.10 ansible_user=your_user
+#192.168.1.11 ansible_user=your_user
+
+node1 ansible_connection=local
