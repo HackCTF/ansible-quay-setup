@@ -1,0 +1,12 @@
+version: '3.3'
+services:
+  quay:
+    image: quay.io/projectquay/quay
+    ports:
+      - "{{ quay_port }}:8080"
+    environment:
+      - QUAY_HOSTNAME={{ ip_host }}
+    volumes:
+      - quay_storage:/datastorage
+volumes:
+  quay_storage:

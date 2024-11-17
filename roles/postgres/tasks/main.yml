@@ -1,0 +1,4 @@
+- name: Habilitar extensión pg_trgm en PostgreSQL
+  command: >
+    podman exec -it quay_postgres_1 /bin/bash -c
+    "echo 'CREATE EXTENSION IF NOT EXISTS pg_trgm' | psql -d quay -U quay"
