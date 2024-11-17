@@ -1,1 +1,2 @@
 project_path: "/opt/quay"
+ip_host: "{{ip_host}}"
