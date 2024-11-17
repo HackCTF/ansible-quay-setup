@@ -27,7 +27,6 @@
     group: "1000"
     mode: "0755"
   become: true
-  when: quay_container_status is changed
 
 - name: Levantar contenedores con Podman
   command: "/usr/local/bin/podman-compose -f {{ project_path }}/docker-compose.yml up -d"
