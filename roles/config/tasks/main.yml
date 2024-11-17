@@ -22,7 +22,7 @@
 
 - name: Asegurarse de que los permisos de los volúmenes son correctos
   file:
-    path: "{{ project_path }}/quay-registry/conf/init/certs_install.sh"
+    path: "{{ project_path }}/quay-registry"
     owner: "1000"
     group: "1000"
     mode: "0755"
