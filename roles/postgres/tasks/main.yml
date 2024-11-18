@@ -2,3 +2,21 @@
   command: >
     podman exec -it quay_postgres_1 /bin/bash -c
     "echo 'CREATE EXTENSION IF NOT EXISTS pg_trgm' | psql -d quay -U quay"
+
+- name: Detener contenedores con Podman
+  command: "/usr/local/bin/podman-compose -f {{ project_path }}/docker-compose.yml stop"
+  args:
+    chdir: "{{ project_path }}"
+  environment:
+    PATH: "{{ ansible_env.PATH }}:/usr/local/bin"
+  register: podman_compose_output
+  ignore_errors: yes
+
+- name: Levantar contenedores con Podman
+  command: "/usr/local/bin/podman-compose -f {{ project_path }}/docker-compose.yml up -d"
+  args:
+    chdir: "{{ project_path }}"
+  environment:
+    PATH: "{{ ansible_env.PATH }}:/usr/local/bin"
+  register: podman_compose_output
+  ignore_errors: yes
