@@ -1,6 +1,11 @@
 - name: Configuración de Quay en múltiples servidores
   hosts: quay_servers
   become: yes
+  vars_files:
+    - vars/global.yml
+  vars:
+    project_path: "192.168.1.70"
+    ip_host: "/opt/quay"
 
   roles:
     - config
