@@ -1,8 +1,34 @@
-- name: Configuración de Quay en múltiples servidores
-  hosts: quay_servers
-  become: yes
+- name: Preparar entorno de Quay
+  hosts: all
   vars_files:
     - vars/global.yml
+  tasks:
+    - name: Crear directorio del proyecto
+      file:
+        path: "{{ project_path }}"
+        state: directory
+
+    - name: Clonar repositorio del toolkit
+      git:
+        repo: https://github.com/HackCTF/toolkit-installation.git
+        dest: "{{ project_path }}/toolkit-installation"
+        version: main  # Cambia si el branch es diferente
+
+- name: Configurar Quay
+  hosts: all
+  vars_files:
+    - vars/global.yml
+  roles:
+    - role: config
+
+- name: Verificar valor de ip_host
+  hosts: all
+  vars_files:
+    - vars/global.yml
+  tasks:
+    - name: Mostrar valor de ip_host
+      debug:
+        var: ip_host
 
   roles:
     - config
