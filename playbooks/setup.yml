@@ -10,4 +10,4 @@
   roles:
     - config
     - postgres
-    - quay_login
+    #- quay_login
