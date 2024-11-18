@@ -31,6 +31,17 @@
     mode: "0755"
   become: true
   
+- name: Configurar Quay
+  hosts: all
+  vars_files:
+    - vars/global.yml
+  roles:
+    - role: config
+
+- name: Verificar valor de ip_host
+  debug:
+    var: ip_host
+
 - name: Configurar docker-compose.yml
   template:
     src: docker-compose.yml.j2
