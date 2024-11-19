@@ -9,6 +9,7 @@ services:
       POSTGRESQL_DATABASE: quay
     ports:
       - "5432:5432"
+    restart: always
     networks:
       - quay-net
     healthcheck:
@@ -21,6 +22,7 @@ services:
     image: quay.io/fedora/redis-7:latest
     ports:
       - "6379:6379"
+    restart: always
     networks:
       - quay-net
 
@@ -43,6 +45,7 @@ services:
     volumes:
       - ./config.yaml:/quay-registry/conf/stack/config.yaml  # Montar el archivo de configuración
       - ./storage:/datastorage:rw,Z  # Montar el almacenamiento de Quay
+    restart: always
     user: 1000:1000
     cap_drop:
       - ALL
