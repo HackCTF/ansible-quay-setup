@@ -58,7 +58,7 @@ e7050e05a288f9f3498ccd2847fee966d701867bc671b02abf03a6629dc921bb
 ```
 ####  Push the image to Quay
 ```sh
-$ podman push quay.io/username/reponame
+$ podman push {{ip_host}}:8080/username/reponame
 The push refers to a repository [{{ip_host}}/username/reponame] (len: 1)
 Sending image list
 Pushing repository quay.io/username/reponame (1 tags)
