@@ -24,11 +24,10 @@ https://docs.redhat.com/en/documentation/red_hat_quay/3.13/html-single/use_red_h
 
 ### -  Podman
 ```sh
-podman login quay.io
+podman login {{ip_host}}:8080
 Username: myusername
 Password: mypassword
 ```
-with robot access local not https
 
 execute
 ```sh
