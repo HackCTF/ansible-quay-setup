@@ -40,6 +40,11 @@
     src: docker-compose.yml.j2
     dest: "{{ project_path }}/docker-compose.yml"
 
+- name: Configurar registries.conf
+  template:
+    src: registries.conf.j2
+    dest: "/etc/containers/registries.conf"
+
 - name: Levantar contenedores con Podman
   command: "/usr/local/bin/podman-compose -f {{ project_path }}/docker-compose.yml up -d"
   args:
