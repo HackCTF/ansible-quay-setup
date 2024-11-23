@@ -40,7 +40,7 @@ insecure = true
 ```
 and execute
 ```sh
-podman login --tls-verify=false -u="neomatrix+robot" -p="E0J28S1DFEMUVYG04JWT3WVL8PCMGAWSQPIO7OKZKFY0YUFFDTBW8FVCYOTCOQE6" localhost:8080
+podman login --tls-verify=false {{ip_host}}:8080
 Login Succeeded!
 ```
 
