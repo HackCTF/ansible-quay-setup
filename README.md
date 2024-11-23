@@ -53,7 +53,7 @@ We next need to tag the container to a known image name
 
 Note that the username must be your Quay username and reponame is the new name of your repository.
 ```sh
-$ podman commit 07f2065197ef {{ip_host}}/username/reponame
+$ podman commit 07f2065197ef {{ip_host}}:8080/username/reponame
 e7050e05a288f9f3498ccd2847fee966d701867bc671b02abf03a6629dc921bb
 ```
 ####  Push the image to Quay
@@ -64,8 +64,8 @@ Sending image list
 Pushing repository quay.io/username/reponame (1 tags)
 8dbd9e392a96: Pushing [=======>         ] 21.27 MB/134.1 MB 40s
 ```
-#### Pull the image from Quay.io
+#### Pull the image from Quay
 If any changes were made on another machine, a docker pull can be used to update the repository locally
 ```sh
-$ podman pull {{ip_host}}/username/reponame
+$ podman pull {{ip_host}}:8080/username/reponame
 ```
