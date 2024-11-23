@@ -29,16 +29,8 @@ Username: myusername
 Password: mypassword
 ```
 with robot access local not https
-edit the file
 
-```sh
-nano /etc/containers/registries.conf
-# Configuración del registro inseguro (en formato v2)
-[[registry]]
-location = "192.168.1.70:8080"
-insecure = true
-```
-and execute
+execute
 ```sh
 podman login --tls-verify=false {{ip_host}}:8080
 Login Succeeded!
