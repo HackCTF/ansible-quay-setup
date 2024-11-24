@@ -12,7 +12,7 @@ ansible-playbook playbooks/setup.yml
 
 Entrar al sitio web mediante el navegador web
 ```bash
-{{ ip_host }}:8080
+localhost:8080
 ```
 
 ##  Robot Access
@@ -24,14 +24,14 @@ https://docs.redhat.com/en/documentation/red_hat_quay/3.13/html-single/use_red_h
 
 ### -  Podman
 ```sh
-podman login {{ip_host}}:8080
+podman login localhost:8080
 Username: myusername
 Password: mypassword
 ```
 
 execute
 ```sh
-podman login --tls-verify=false {{ip_host}}:8080
+podman login --tls-verify=false localhost:8080
 Login Succeeded!
 ```
 
@@ -53,13 +53,13 @@ We next need to tag the container to a known image name
 
 Note that the username must be your Quay username and reponame is the new name of your repository.
 ```sh
-$ podman commit 07f2065197ef {{ip_host}}:8080/username/reponame
+$ podman commit 07f2065197ef localhost:8080/username/reponame
 e7050e05a288f9f3498ccd2847fee966d701867bc671b02abf03a6629dc921bb
 ```
 ####  Push the image to Quay
 ```sh
-$ podman push {{ip_host}}:8080/username/reponame
-The push refers to a repository [{{ip_host}}/username/reponame] (len: 1)
+$ podman push localhost:8080/username/reponame
+The push refers to a repository [localhost/username/reponame] (len: 1)
 Sending image list
 Pushing repository quay.io/username/reponame (1 tags)
 8dbd9e392a96: Pushing [=======>         ] 21.27 MB/134.1 MB 40s
@@ -67,5 +67,5 @@ Pushing repository quay.io/username/reponame (1 tags)
 #### Pull the image from Quay
 If any changes were made on another machine, a docker pull can be used to update the repository locally
 ```sh
-$ podman pull {{ip_host}}:8080/username/reponame
+$ podman pull localhost:8080/username/reponame
 ```
