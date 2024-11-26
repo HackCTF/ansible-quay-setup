@@ -7,6 +7,7 @@ Instalar el ansible-quay-setup:
 ```bash
 git clone https://github.com/HackCTF/ansible-quay-setup.git
 cd ansible-quay-setup
+python -m pip install -r requirements.txt
 ansible-playbook playbooks/setup.yml
 ```
 
