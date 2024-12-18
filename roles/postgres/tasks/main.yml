@@ -20,3 +20,12 @@
     PATH: "{{ ansible_env.PATH }}:/usr/local/bin"
   register: podman_compose_output
   ignore_errors: yes
+
+- name: Detener contenedores con Podman
+  command: "/usr/local/bin/podman-compose -f {{ project_path }}/docker-compose.yml stop"
+  args:
+    chdir: "{{ project_path }}"
+  environment:
+    PATH: "{{ ansible_env.PATH }}:/usr/local/bin"
+  register: podman_compose_output
+  ignore_errors: yes
