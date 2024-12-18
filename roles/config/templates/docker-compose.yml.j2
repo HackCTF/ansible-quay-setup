@@ -33,17 +33,18 @@ services:
       DATABASE_URL: postgres://quay:password@{{ ip_host }}:5432/quay
       LOG_LEVEL: debug
       HTTP_ADDR: 0.0.0.0:8080
-      SERVER_HOSTNAME: "localhost"
+      SERVER_HOSTNAME: "hackctf.com.arg:8448"
       BUILDLOGS_REDIS: "redis://{{ ip_host }}:6379/0"
     ports:
       - "8080:8080"
+      - "8448:8443"
     depends_on:
       postgres:
         condition: service_healthy
     networks:
       - quay-net
     volumes:
-      - ./config.yaml:/quay-registry/conf/stack/config.yaml  # Montar el archivo de configuración
+      - ./config:/quay-registry/conf/stack:rw,Z  # Montar el archivo de configuración
       - ./storage:/datastorage:rw,Z  # Montar el almacenamiento de Quay
     restart: always
     user: 1000:1000
