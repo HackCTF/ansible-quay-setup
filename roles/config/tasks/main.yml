@@ -3,6 +3,15 @@
     path: "{{ project_path }}"
     state: directory
 
+- name: Crear directorios necesarios si no existen
+  file:
+    path: "{{ project_path }}/config"
+    state: directory
+    owner: "1000"
+    group: "1000"
+    mode: "0755"
+  become: true
+
 #- name: Clonar repositorio del toolkit
 #  git:
 #    repo: https://github.com/HackCTF/toolkit-installation.git
@@ -12,7 +21,7 @@
 - name: Configurar config.yaml.j2
   template:
     src: config.yaml.j2
-    dest: "{{ project_path }}/config.yaml"
+    dest: "{{ project_path }}/config/config.yaml"
 
 - name: Crear directorios necesarios si no existen
   file:
